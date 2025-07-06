@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emotion_based_music_recommendation_system"
+version = "0.1.0"
+description = "An emotion-aware music recommendation system using ML and audio features"
+readme = "README.md"
+requires-python = ">=3.12.4"
+authors = [
+  { name="Sravanthi Kotla", email="kotlasravanthi229@gmail.com" }
+]
+license = { text = "MIT" }
+dependencies = []
+
+[project.urls]
+Homepage = 'https://github.com/KotlaSravanthi-eng/music_recommendation_system_based_on_emotion'
