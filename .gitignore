@@ -136,6 +136,10 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# big data files
+notebook/raw_data.csv
+notebook/cleaned_data.csv
+
 # Environments
 .env
 .envrc
