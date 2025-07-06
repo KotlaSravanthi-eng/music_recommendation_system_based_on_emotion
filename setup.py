@@ -1,3 +1,4 @@
+import os
 from setuptools import find_packages, setup
 from typing import List
 
@@ -11,6 +12,9 @@ def get_requirements(file_path:str)->List[str]:
         requirements = [req.strip() for req in requirements if req.strip() != '-e .']
     return requirements 
 
+this_directory = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name = 'music_recommendation_system_based_on_emotion',
