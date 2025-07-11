@@ -36,7 +36,7 @@ def preprocess_and_save(data, output_dir="artifacts"):
         data['Artist(s)']
     )
 
-    tfidf = TfidfVectorizer(max_features=300, stop_words='english')
+    tfidf = TfidfVectorizer(max_features=5000, stop_words='english')
     tfidf_matrix = tfidf.fit_transform(data['combined_text'])
 
     # 6. TF-IDF on similar artist + similar song context
