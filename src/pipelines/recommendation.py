@@ -2,13 +2,18 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.sparse import hstack
-from src.pipelines.mood_extraction import extract_mood_artist
+from pipelines.mood_extraction import extract_mood_artist
 
-
-def get_recommendations(
-    user_input, data, final_matrix, scaled_audio, tfidf, tfidf_similar,
-    similar_vectors, similar_song_dict, similar_artist_dict, known_artists
-):
+def get_recommendations(user_input, 
+                        data, 
+                        final_matrix, 
+                        scaled_audio, 
+                        tfidf, 
+                        tfidf_similar,
+                        similar_vectors, 
+                        similar_song_dict, 
+                        known_artists, 
+                        top_n = 5):
     # 1. Extract mood and artist
     mood, artist = extract_mood_artist(user_input, known_artists)
 
@@ -37,7 +42,7 @@ def get_recommendations(
     mood_vector = tfidf.transform([search_text])
 
     # 4. Prepare similarity context
-    sim_context_input = artist or mood or user_input
+    sim_context_input = artist if artist else mood or user_input
     context_vector = tfidf_similar.transform([sim_context_input])
 
     # 5. Build hybrid user vector (text + mood + average audio features)
@@ -47,37 +52,50 @@ def get_recommendations(
     # 6. Content similarity
     content_scores = cosine_similarity(user_vector, final_matrix).flatten()
 
-    # 7. Similar artist/song similarity
-    sim_scores = cosine_similarity(context_vector, similar_vectors).flatten()
+    # Apply optional activity column filter
+    if activity_col:
+        activity_mask = data[activity_col] == 1
+        content_scores *= activity_mask.astype(int).values
 
-    # 8. Final hybrid score
-    final_scores = 0.7 * content_scores + 0.3 * sim_scores
+    # Boost scores of songs from the mentioned artist
+    if artist:
+        artist_mask = data['Artist(s)'].str.lower() == artist.lower()
+        content_scores += artist_mask.astype(int).values * 0.75
 
-    # 9. Apply activity mask if matched
-    if activity_col and activity_col in data.columns:
-        mask = data[activity_col] == 1
-        final_scores *= mask.astype(int).values
-
-    # 10. Pick top results
-    top_indices = final_scores.argsort()[::-1][:5]
+    # Get top N recommended songs (main DataFrame)
+    top_indices = content_scores.argsort()[::-1][:top_n]
     results = data.iloc[top_indices][['song', 'Artist(s)', 'emotion', 'Genre_str']].copy()
+    results['similarity_score'] = content_scores[top_indices]
 
-    # 11. Expand similar songs and artists per recommendation
-    similar_rows = []
+    # 8. Extract 5 similar songs + artists (combined)
+    all_similar_songs = set()
+    all_similar_artists = set()
+
     for _, row in results.iterrows():
         song = row['song']
-        sim_songs = list(similar_song_dict.get(song, {}).keys())[:5]
-        sim_artists = list(similar_artist_dict.get(song, []))[:5]
-        
-        if not sim_artists: sim_artists = ["N/A"]
-        for sim_artist in sim_artists:
-            similar_rows.append({
-                'song': row['song'],
-                'Artist(s)': row['Artist(s)'],
-                'emotion': row['emotion'],
-                'Genre_str': row['Genre_str'],
-                'Similar Artist': sim_artist,
-                'Similar Songs': ', '.join(sim_songs)
-            })
+        original_artist = row['Artist(s)'].strip().lower()
 
-    return pd.DataFrame(similar_rows)
+        # Get similar song
+        song_key = song.strip().lower()
+
+        sim_song = list(similar_song_dict.get(song_key, {}).keys())[:3]
+        all_similar_songs.update(sim_song)
+
+
+        # Similar artists via genre
+        song_genres = row['Genre_str'].split()
+        genre_mask = data['Genre_str'].apply(lambda x: any(g in x.split() for g in song_genres))
+
+        exclude_artists = {original_artist}
+        if artist:
+            exclude_artists.add(artist.strip().lower())
+
+        genre_artists = data[genre_mask]['Artist(s)'].str.lower().unique().tolist()
+        filtered_artists = [a for a in genre_artists if a not in exclude_artists]
+        all_similar_artists.update(filtered_artists)  # Collect more
+
+    # Final lists
+    final_similar_songs = list(all_similar_songs)[:5]
+    final_similar_artists = list(all_similar_artists)[:5]
+
+    return results, final_similar_songs, final_similar_artists

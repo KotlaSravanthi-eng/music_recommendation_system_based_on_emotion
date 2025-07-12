@@ -1,5 +1,5 @@
 import sys
-from src.logger import logger
+from logger import logger
 
 
 class CustomException(Exception):
