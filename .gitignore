@@ -219,3 +219,5 @@ __marimo__/
 "notebook/cleaned_data.csv" 
 notebook/raw_data.csveuullcev.part
 artifacts/preprocessed_bundle.pkl-e "\nartifacts/preprocessed_bundle.pkl\nnotebook/*.part" 
+artifacts/preprocessed_bundle.pkl
+notebook/*.part
