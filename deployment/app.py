@@ -3,6 +3,13 @@ import pandas as pd
 import joblib
 from src.pipelines.recommendation import get_recommendations
 
+import spacy
+import subprocess
+try:
+    spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 # Load cleaned data
