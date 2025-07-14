@@ -1,12 +1,12 @@
 import os
 import joblib
 import pandas as pd
-from components.data_ingestion import DataIngestion
-from components.preprocessing import preprocess_and_save
-from pipelines.similarity_engine import build_similarity_dicts
-from pipelines.recommendation import get_recommendations
+from src.components.data_ingestion import DataIngestion
+from src.components.preprocessing import preprocess_and_save
+from src.pipelines.similarity_engine import build_similarity_dicts
+from src.pipelines.recommendation import get_recommendations
 
-from logger import logger
+from src.logger import logger
 
 if __name__ == "__main__":
 
@@ -15,6 +15,7 @@ if __name__ == "__main__":
     cleaned_path = ingestion.initiate_data_ingestion()
 
     data = pd.read_csv(cleaned_path)
+    data.to_csv("artifacts/music_cleaned.csv", index=False)
 
     # Step 2: Load or Create Preprocessing Bundle
     bundle_path = "artifacts/preprocessed_bundle.pkl"
@@ -46,6 +47,7 @@ if __name__ == "__main__":
 
     # Step 4: prepare similarity dictionaries
     similar_song_dict = build_similarity_dicts(data)
+    joblib.dump(similar_song_dict, "artifacts/similar_song_dict.pkl")
 
     # step 5: Add similar context 
     data['similar_context'] = (

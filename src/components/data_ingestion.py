@@ -2,8 +2,8 @@ import os
 import sys
 import pandas as pd
 from dataclasses import dataclass
-from logger import logger
-from exception import CustomException
+from src.logger import logger
+from src.exception import CustomException
 
 @dataclass
 class DataIngestionConfig:

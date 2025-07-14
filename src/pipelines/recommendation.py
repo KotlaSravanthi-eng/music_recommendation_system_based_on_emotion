@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.sparse import hstack
-from pipelines.mood_extraction import extract_mood_artist
+from src.pipelines.mood_extraction import extract_mood_artist
 
 def get_recommendations(user_input, 
                         data, 

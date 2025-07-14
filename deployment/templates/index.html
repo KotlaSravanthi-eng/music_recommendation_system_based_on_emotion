@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Mind</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container fade-in">
+        <img src="{{ url_for('static', filename='logo/music_mind_logo.png') }}" class="logo pulse" alt="Music Mind Logo">
+
+        <h1 class="glow-text">Music Mind</h1>
+        <p class="tagline">Let your mood pick the music</p>
+
+        <form method="POST" action="/recommend" class="slide-up" id="recommendForm">
+            <input type="text" name="user_input" id="user_input" placeholder="Enter a mood, artist or activity..." required>
+            <button type="submit">🎧 Recommend</button>
+        </form>
+
+        <h3 class="section-title">Pick an Activity</h3>
+        <div class="mood-buttons">
+            <button class="mood" type="button" onclick="submitMood('Party')"> Party</button>
+            <button class="mood" type="button" onclick="submitMood('Study')"> Study</button>
+            <button class="mood" type="button" onclick="submitMood('Exercise')"> Exercise</button>
+            <button class="mood" type="button" onclick="submitMood('Running')"> Running</button>
+            <button class="mood" type="button" onclick="submitMood('Driving')"> Driving</button>
+            <button class="mood" type="button" onclick="submitMood('Morning Vibes')"> Morning Vibes</button>
+            <button class="mood" type="button" onclick="submitMood('Relaxation')"> Relaxation</button>
+            <button class="mood" type="button" onclick="submitMood('Yoga')"> Yoga</button>
+        </div>
+
+
+
+       {% if results %}
+        <div class="results-box fade-in">
+            <h3>🎶 Top Recommendations for "{{ user_input }}"</h3>
+
+            <div class="results-list">
+                {% for r in results %}
+                <div class="song-row">
+                    <div class="song-info">
+                        <p class="song-name">{{ r['song'] }}</p>
+                        <p class="artist-name">{{ r['artist'] | lower }}</p>
+                    </div>
+                    <div class="song-extra">
+                        <img src="{{ url_for('static', filename='logo/play_button.png') }}" class="play-icon" alt="Play">
+                        <span class="heart">♡</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if similar_songs %}
+            <hr class="divider">
+            <h3 class="section-title">🎧 You Might Also Like</h3>
+            <div class="results-list">
+                {% for s in similar_songs %}
+                <div class="song-row">
+                    <div class="song-info">
+                        <p class="song-name">{{ s['song'] }}</p>
+                    </div>
+                    <div class="song-extra">
+                        <img src="{{ url_for('static', filename='logo/play_button.png') }}" class="play-icon" alt="Play">
+                        <span class="heart">♡</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            {% if similar_artists %}
+            <h3 class="section-title">👥 Similar Artists</h3>
+            <div class="similar-artists">
+                {% for artist in similar_artists %}
+                    <div class="artist-card">
+                        <img src="{{ artist['image'] or url_for('static', filename='logo/default_artist.jpg') }}" class="artist-icon" alt="{{ artist['name'] }}">
+                        <div class="artist-info">
+                            <p class="artist-name">{{ artist['name'] }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+    <script>
+        function submitMood(mood) {
+            document.getElementById("user_input").value = mood;
+            document.getElementById("recommendForm").submit();
+        }
+    </script>
+
+</body>
+</html>

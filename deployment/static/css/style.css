@@ -1,0 +1,318 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #a18cd1, #fbc2eb);
+    margin: 0;
+    padding: 0;
+    animation: bg-slide 10s ease-in-out infinite alternate;
+}
+
+@keyframes bg-slide {
+    0% { background-position: left; }
+    100% { background-position: right; }
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: fade-in 1s ease-in;
+}
+
+h1.glow-text {
+    font-size: 2.8em;
+    color: #6A1B9A;
+    text-shadow: 0 0 10px #D1C4E9;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+form input[type="text"] {
+    width: 80%;
+    padding: 14px;
+    font-size: 1em;
+    border: 2px solid #6A1B9A;
+    border-radius: 10px;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+form input[type="text"]:focus {
+    box-shadow: 0 0 10px #9575CD;
+}
+
+form button {
+    padding: 12px 30px;
+    background-color: #6A1B9A;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+    background-color: #4A148C;
+    transform: scale(1.05);
+}
+
+.mood-buttons {
+    margin-top: 20px;
+}
+
+.mood-buttons .mood {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #BA68C8;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.mood-buttons .mood:hover {
+    background-color: #9C27B0;
+    transform: scale(1.1);
+}
+
+.results-box {
+    text-align: left;
+    margin-top: 30px;
+    animation: fade-in 1s ease-in;
+    padding: 20px;
+    border-radius: 15px;
+    background: #f9f9f9;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.results-box ul {
+    padding-left: 20px;
+    color: #333;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+    margin-top: 40px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6A1B9A;
+    text-shadow: 0 0 6px #E1BEE7;
+}
+
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+ul li {
+    background: #e0e0e0;
+    display: inline-block;
+    margin: 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+.results-list {
+    margin-top: 30px;
+}
+
+.song-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease;
+}
+
+.song-row:hover {
+    transform: translateY(-2px);
+}
+
+.song-info {
+    text-align: left;
+}
+
+.song-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 0;
+    color: #4A148C;
+}
+
+.artist-name {
+    font-size: 0.85em;
+    margin: 0;
+    color: #888;
+    text-transform: lowercase;
+}
+
+.song-extra {
+    display: flex;
+    align-items: center;
+}
+
+.play-btn {
+    font-size: 1.2em;
+    color: #4A148C;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.play-btn:hover {
+    transform: scale(1.2);
+    color: #6A1B9A;
+}
+
+.heart {
+    font-size: 1.2em;
+    color: #BA68C8;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.heart:hover {
+    transform: scale(1.2);
+}
+
+.song-row {
+    margin-bottom: 16px;
+}
+
+.play-btn:hover {
+    transform: scale(1.2);
+    color: #6A1B9A;
+    text-shadow: 0 0 6px #D1C4E9;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+.similar-artists {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.artist-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8faff; 
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.12);
+    transition: transform 0.2s ease;
+}
+
+.artist-card:hover {
+    transform: translateY(-2px);
+}
+
+
+.artist-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.artist-info {
+    text-align: left;
+}
+
+.artist-info .artist-name {
+    font-weight: 700;            
+    color: #7b2cbf;                
+    font-size: 1rem;
+    text-transform: capitalize;    
+
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 30px 0;
+}
+
+.mood-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.mood-buttons .mood {
+    padding: 12px 24px;
+    background-color: #BA68C8;  
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 6px 20px rgba(186, 104, 200, 0.3); 
+}
+
+.mood-buttons .mood:hover {
+    background-color: #9C27B0;
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(156, 39, 176, 0.35);
+}
+
+.song-extra a.play-btn {
+  margin-right: 10px;
+}
+
+.play-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.play-icon:hover {
+    transform: scale(1.15);
+}
