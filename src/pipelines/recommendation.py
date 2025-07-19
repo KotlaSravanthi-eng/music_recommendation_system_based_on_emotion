@@ -92,7 +92,7 @@ def get_recommendations(user_input,
 
         genre_artists = data[genre_mask]['Artist(s)'].str.lower().unique().tolist()
         filtered_artists = [a for a in genre_artists if a not in exclude_artists]
-        all_similar_artists.update(filtered_artists)  # Collect more
+        all_similar_artists.update(filtered_artists[:10])  # Collect more
 
     # Final lists
     final_similar_songs = list(all_similar_songs)[:5]

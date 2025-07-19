@@ -15,8 +15,7 @@ if __name__ == "__main__":
     cleaned_path = ingestion.initiate_data_ingestion()
 
     data = pd.read_csv(cleaned_path)
-    data.to_csv("artifacts/music_cleaned.csv", index=False)
-
+    
     # Step 2: Load or Create Preprocessing Bundle
     bundle_path = "artifacts/preprocessed_bundle.pkl"
     if os.path.exists(bundle_path):

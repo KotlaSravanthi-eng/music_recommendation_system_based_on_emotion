@@ -13,7 +13,7 @@ except OSError:
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 # Load cleaned data
-data = pd.read_csv("artifacts/music_cleaned.csv")  # Make sure this is saved in main.py after ingestion
+data = pd.read_csv("artifacts/music_cleaned_data.csv")  # Make sure this is saved in main.py after ingestion
 
 # Load preprocessing bundle
 bundle_path = "artifacts/preprocessed_bundle.pkl"

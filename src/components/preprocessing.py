@@ -53,6 +53,9 @@ def preprocess_and_save(data, output_dir="artifacts"):
     # Combine everything into final feature matrix
     final_matrix = hstack([tfidf_matrix, sim_matrix, scaled_audio])
 
+    assert len(data) == tfidf_matrix.shape[0] == scaled_audio.shape[0] == sim_matrix.shape[0], \
+    f"Shape mismatch: data={len(data)}, tfidf={tfidf_matrix.shape[0]}, audio={scaled_audio.shape[0]}, sim={sim_matrix.shape[0]}"
+
     # Save everything to disk
     joblib.dump({
         "final_matrix": final_matrix,
