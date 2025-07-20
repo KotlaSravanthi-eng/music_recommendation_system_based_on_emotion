@@ -81,7 +81,7 @@ def recommend():
         
         # results data
         results_data = []
-        for i, row in top_df.iterrows():
+        for _, row in top_df.iterrows():
             results_data.append({
                 'song': row['song'],
                 'artist': row.get('Artist(s)', 'Unknown') 

@@ -4,4 +4,4 @@ services:
     name: music-mind
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn deployment.app:app"
+    startCommand: "gunicorn app:app"
