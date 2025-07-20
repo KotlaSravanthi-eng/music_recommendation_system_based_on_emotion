@@ -5,10 +5,14 @@ from src.pipelines.recommendation import get_recommendations
 
 import spacy
 import subprocess
-try:
-    spacy.load("en_core_web_sm")
-except OSError:
-    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+import importlib.util
+
+model_name = "en_core_web_sm"
+
+if importlib.util.find_spec(model_name) is None:
+    subprocess.run(["python", "-m", "spacy", "download", model_name])
+
+nlp = spacy.load(model_name)
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 

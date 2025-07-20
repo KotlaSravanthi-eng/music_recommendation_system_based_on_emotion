@@ -54,6 +54,7 @@ The system also uses collaborative filtering to suggest similar songs and simila
 ---
 
 ## 📁 Project Structure
+<pre> ```
 music_recommendation_system/
 ├── artifacts/ 
 |   ├── preprocessed_bundle.pkl
@@ -88,6 +89,7 @@ music_recommendation_system/
 | └──utils.py
 ├── requirements.txt
 └── README.md
+``` </pre>
 
 ## 💻 How to Run Locally
 
