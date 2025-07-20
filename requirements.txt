@@ -3,7 +3,6 @@ pandas
 scikit-learn
 gdown
 spacy==2.3.5
-blis==0.4.1
 joblib
 matplotlib
 seaborn
