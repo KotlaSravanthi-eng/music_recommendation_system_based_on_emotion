@@ -7,7 +7,7 @@ name = "emotion_based_music_recommendation_system"
 version = "0.1.0"
 description = "An emotion-aware music recommendation system using ML and audio features"
 readme = "README.md"
-requires-python = "<3.10, >= 3.8"
+requires-python = ">=3.10.13, <3.11"
 authors = [
   { name="Sravanthi Kotla", email="kotlasravanthi229@gmail.com" }
 ]
