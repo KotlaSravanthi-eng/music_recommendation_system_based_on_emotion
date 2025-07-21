@@ -17,7 +17,7 @@ nlp = spacy.load(model_name)
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 # Load cleaned data
-data = pd.read_csv("artifacts/music_cleaned_data.csv")  # Make sure this is saved in main.py after ingestion
+data = pd.read_csv("artifacts/music_cleaned_data.csv")  
 
 # Load preprocessing bundle
 bundle_path = "artifacts/preprocessed_bundle.pkl"
@@ -28,7 +28,7 @@ tfidf = bundle['tfidf']
 tfidf_similar = bundle['tfidf_similar']
 
 # Build similarity dictionary
-similar_song_dict = joblib.load("artifacts/similar_song_dict.pkl")  # Save this in main.py if not already
+similar_song_dict = joblib.load("artifacts/similar_song_dict.pkl") 
 
 # Rebuild similar context vectors
 data['similar_context'] = (
@@ -103,5 +103,5 @@ def recommend():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=7860)
 
