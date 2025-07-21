@@ -1,7 +1,14 @@
 import spacy
 import re
 
-nlp = spacy.load("en_core_web_sm")
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    # If model isn't linked yet, do this
+    from spacy.cli import download
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
+
 
 # Map user mood keywords to dataset mood labels
 mood_map = {
