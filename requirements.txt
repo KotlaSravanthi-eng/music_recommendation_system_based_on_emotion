@@ -2,7 +2,7 @@ numpy
 pandas
 scikit-learn
 gdown
-spacy==3.7.2
+spacy==2.3.5
 joblib
 matplotlib
 seaborn

@@ -4,6 +4,8 @@ services:
     name: music-mind
     env: python
     buildCommand: |
+      apt-get update -y
+      apt-get install -y build-essential libblas-dev liblapack-dev gfortran python3.9-dev
       pip install -r requirements.txt 
       python -m spacy download en_core_web_sm
     startCommand: gunicorn app:app
