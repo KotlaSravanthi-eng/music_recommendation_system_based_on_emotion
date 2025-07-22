@@ -18,8 +18,8 @@ The system also uses collaborative filtering to suggest similar songs and simila
 
 ## 🔗 Live Demo
 
-[👉 Try the App Here](https://your-deployment-link.com)  
-📹 *(Optional: Add demo video if available)*
+[👉 Try the App Here](https://huggingface.co/spaces/kotlasravanthi/Music-Mind)  
+![Project Demo](./demo.gif)
 
 ---
 
@@ -48,7 +48,7 @@ The system also uses collaborative filtering to suggest similar songs and simila
 - Vectorization: TF-IDF
 - Audio Prep: PowerTransformer
 - Frontend: HTML + CSS 
-- Deployement: Render
+- Deployement: Docker
 - Storage: Google Cloud Storage
 
 ---
@@ -68,9 +68,7 @@ music_recommendation_system/
 | |      └── play_button
 | ├──templates/index.html
 │ └── app.py
-| └──Procfile
-| └──render.yaml
-| └──runtime.txt
+| └──Dockerfile
 ├── notebook/
 |   ├── Data_cleaning 
 |   ├── Model_Training 
