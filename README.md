@@ -19,6 +19,8 @@ The system also uses collaborative filtering to suggest similar songs and simila
 ## 🔗 Live Demo
 
 [👉 Try the App Here](https://huggingface.co/spaces/kotlasravanthi/Music-Mind)  
+
+
 ![Project Demo](./demo.gif)
 
 ---
