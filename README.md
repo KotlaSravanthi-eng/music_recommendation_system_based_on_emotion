@@ -106,7 +106,7 @@ source music_env/Scripts/activate
 pip install -r requirements.txt
 
 # 4. Run the app
-python -m deploymen.app
+python -m deployment.app
 --
 ```
 
